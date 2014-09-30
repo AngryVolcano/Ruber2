@@ -8,11 +8,11 @@ import java.util.ArrayList;
 public class History
 {
     private int offset, limit, count;
-    private ArrayList<Trips> trip = new ArrayList<Trips>();
+    private ArrayList<Trip> trip = new ArrayList<Trip>();
 
     public History() { }
 
-    public History(int offset, int limit, int count, ArrayList<Trips> trip)
+    public History(int offset, int limit, int count, ArrayList<Trip> trip)
     {
         this.offset = offset;
         this.limit = limit;
@@ -32,9 +32,9 @@ public class History
 
     public void setCount(int count) { this.count = count; }
 
-    public ArrayList<Trips> getTrip() { return trip; }
+    public ArrayList<Trip> getTrip() { return trip; }
 
-    public void setTrip(ArrayList<Trips> trip) { this.trip = trip; }
+    public void setTrip(ArrayList<Trip> trip) { this.trip = trip; }
 
     @Override
     public String toString()
