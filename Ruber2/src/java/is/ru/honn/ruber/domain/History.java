@@ -15,6 +15,9 @@ public class History
     private int offset, limit, count;
     private ArrayList<Trip> trip = new ArrayList<Trip>();
 
+    /**
+     * Default constructor.
+     */
     public History() { }
 
     public History(int offset, int limit, int count, ArrayList<Trip> trip)
