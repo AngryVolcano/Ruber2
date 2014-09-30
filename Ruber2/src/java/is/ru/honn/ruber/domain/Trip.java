@@ -1,17 +1,36 @@
 package is.ru.honn.ruber.domain;
 
 /**
- *
+ * POJO class containing trip information.
  */
 public class Trip
 {
+
     private TripStatus status;
 
+    /**
+     * The id of the user who bought the trip.
+     */
     private String uuid;
+
+    /**
+     * The time when trip was requested.
+     * The time when trip was started.
+     * The time when trip was finished.
+     */
     private long request_time, start_time, end_time;
+    /**
+     * The trip's product ID.
+     */
     private String product_id;
+    /**
+     * The total distance of the trip.
+     */
     private double distance;
 
+    /**
+     * The status of the trip.
+     */
     public enum TripStatus
     {
         COMPLETED;
@@ -27,6 +46,9 @@ public class Trip
         }
     }
 
+    /**
+     * Default constructor.
+     */
     public Trip() { }
 
     public Trip(String uuid, long request_time, long start_time, long end_time, String product_id, double distance)

@@ -3,10 +3,15 @@ package is.ru.honn.ruber.domain;
 import java.util.ArrayList;
 
 /**
- *
+ * POJO class containing info on the trip history of a user.
  */
 public class History
 {
+    /**
+     * Offset = position in pagination.
+     * limit = number of items to retrieve, max 100.
+     * count = a total of trips the user has taken.
+     */
     private int offset, limit, count;
     private ArrayList<Trip> trip = new ArrayList<Trip>();
 
