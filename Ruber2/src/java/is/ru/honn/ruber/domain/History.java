@@ -3,13 +3,29 @@ package is.ru.honn.ruber.domain;
 import java.util.ArrayList;
 
 /**
- *
+ * POJO class containing info on the trip history of a user.
  */
 public class History
 {
-    private int offset, limit, count;
+    /**
+     * Position in pagination.
+     */
+    private int offset;
+    /**
+     * Number of items to retrieve, max 100.
+     */
+    private int limit;
+    /**
+     * Total trips taken by the user.
+     */
+    private int count;
+    /**
+     * List of trips the user has taken.
+     */
     private ArrayList<Trip> trip = new ArrayList<Trip>();
-
+    /**
+     * Default constructor.
+     */
     public History() { }
 
     public History(int offset, int limit, int count, ArrayList<Trip> trip)
