@@ -23,7 +23,6 @@ public class History
      * List of trips the user has taken.
      */
     private ArrayList<Trip> trip = new ArrayList<Trip>();
-
     /**
      * Default constructor.
      */

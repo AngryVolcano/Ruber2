@@ -5,14 +5,14 @@ package is.ru.honn.ruber.domain;
  */
 public class Trip
 {
-
+    /**
+     * The status of the trip.
+     */
     private TripStatus status;
-
     /**
      * The id of the user who bought the trip.
      */
     private String uuid;
-
     /**
      * The time when trip was requested.
      */
@@ -33,9 +33,8 @@ public class Trip
      * The total distance of the trip.
      */
     private double distance;
-
     /**
-     * The status of the trip.
+     * Possible trip statuses.
      */
     public enum TripStatus
     {
@@ -51,7 +50,6 @@ public class Trip
             }
         }
     }
-
     /**
      * Default constructor.
      */
