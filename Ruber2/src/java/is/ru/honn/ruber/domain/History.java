@@ -8,11 +8,20 @@ import java.util.ArrayList;
 public class History
 {
     /**
-     * Offset = position in pagination.
-     * limit = number of items to retrieve, max 100.
-     * count = a total of trips the user has taken.
+     * Position in pagination.
      */
-    private int offset, limit, count;
+    private int offset;
+    /**
+     * Number of items to retrieve, max 100.
+     */
+    private int limit;
+    /**
+     * Total trips taken by the user.
+     */
+    private int count;
+    /**
+     * List of trips the user has taken.
+     */
     private ArrayList<Trip> trip = new ArrayList<Trip>();
 
     /**

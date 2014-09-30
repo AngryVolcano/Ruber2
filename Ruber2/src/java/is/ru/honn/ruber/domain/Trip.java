@@ -15,10 +15,16 @@ public class Trip
 
     /**
      * The time when trip was requested.
+     */
+    private long request_time;
+    /**
      * The time when trip was started.
+     */
+    private long start_time;
+    /**
      * The time when trip was finished.
      */
-    private long request_time, start_time, end_time;
+    private long end_time;
     /**
      * The trip's product ID.
      */
