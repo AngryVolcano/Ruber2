@@ -71,7 +71,7 @@ public class RuberServiceStub extends RuObject implements RuberService
 
     public History getHistory(String id) throws UserNotFoundException
     {
-
+        throw new UserNotFoundException();
     }
 
     public void signup(User user)
@@ -86,6 +86,6 @@ public class RuberServiceStub extends RuObject implements RuberService
 
     public User getUser(String username) throws UserNotFoundException
     {
-
+        throw new UserNotFoundException();
     }
 }
