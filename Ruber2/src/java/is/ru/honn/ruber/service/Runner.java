@@ -4,7 +4,7 @@ import is.ru.honn.ruber.domain.Trip;
 import is.ru.honn.ruber.domain.User;
 
 /**
- * Created by sveinn on 9/30/14.
+ * Simple test class
  */
 public class Runner
 {

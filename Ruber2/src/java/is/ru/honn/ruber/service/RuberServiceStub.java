@@ -63,17 +63,19 @@ public class RuberServiceStub extends RuObject implements RuberService
         }
 
     /**
-     *
+     * List of users
      */
     ArrayList<User> userList = new ArrayList<User>();
+
     /**
-     *
+     * List of trips
      */
     ArrayList<Trip> tripList = new ArrayList<Trip>();
 
     /**
+     * Method to add a trip to the list of trips
      *
-     * @param trip
+     * @param trip: The trip to be added to the trip list
      */
     public void addTrip(Trip trip)
     {
@@ -81,24 +83,30 @@ public class RuberServiceStub extends RuObject implements RuberService
     }
 
     /**
+     * A method to get the history of trips for a given user
+     * through the user's uuId
      *
-     * @param uuid
-     * @return
+     * @param uuid: uuId of the user
+     * @return the user's triphistory
      */
     public History getHistory(String uuid)
     {
+        // Iterator to iterate through the trip list
         Iterator<Trip> tripIterator = tripList.iterator();
+        // New list to contain the user's list
         ArrayList<Trip> userTripList = new ArrayList<Trip>();
 
+        // Iterate through the list og trips
         while(tripIterator.hasNext())
         {
             Trip currentTrip = tripIterator.next();
+            // If the user's id on the current trip matches the given uuID add the trip to the new triplist
             if(currentTrip.getUuid().equals(uuid))
                 userTripList.add(currentTrip);
         }
 
+        // Create and initialize the user's history
         History userHistory = new History();
-
         userHistory.setLimit(0);
         userHistory.setOffset(0);
         userHistory.setCount(userTripList.size());
@@ -108,61 +116,69 @@ public class RuberServiceStub extends RuObject implements RuberService
     }
 
     /**
+     * A method to sign up a new user
      *
-     * @param user
+     * @param user: The proposed user
      * @throws UsernameExistsException
      */
     public void signup(User user) throws UsernameExistsException
     {
+        // Iterater to iterate through the list of users
         Iterator<User> userIterator = userList.iterator();
         while(userIterator.hasNext())
         {
             User currentUser = userIterator.next();
+            // If the username of the current user matches the given username throw new exception
             if(currentUser.getUsername().equals(user.getUsername()))
                 throw new UsernameExistsException("Username is taken. Please choose something else.");
         }
 
+        // Else add user to the user list
         userList.add(user);
     }
 
     /**
+     * A method to return a list of users
+     * max 100 users
      *
-     * @param limit
-     * @param offset
-     * @return
+     * @param limit: Number of items to retrieve
+     * @param offset: Position in pagination
+     * @return a list of users
      * @throws UserNotFoundException
      */
     public List<User> getUsers(int limit, int offset) throws UserNotFoundException
     {
-        //
+        // Throw exception if the userlist is empty
         if(userList.size() <= 0)
             throw new UserNotFoundException("List of users is empty");
 
-        //
+        // Throw exception if the given offset is greater than the length of the user list
         if(userList.size() < offset)
             throw new UserNotFoundException("List of users is shorter than the offset");
 
-        //
+        // Throw exception if the given limit is greater than the maximum number (100)
         if(100 < limit)
             throw new UserNotFoundException("Limit should not exceed 100");
 
-        //
+        // Return a sublist of users, whatever is smaller: the given offset added to the given limit or 100
         return userList.subList(offset, Math.min(offset + limit, 100));
     }
 
     /**
+     * A method to get a single user
      *
-     * @param username
-     * @return
+     * @param username: username of the User being searched for
+     * @return a single User object
      * @throws UserNotFoundException
      */
     public User getUser(String username) throws UserNotFoundException
     {
+        // Iterater to iterate through the list of users
         Iterator<User> userIterator = userList.iterator();
-
         while(userIterator.hasNext())
         {
             User currentUser = userIterator.next();
+            // If the given user is found return that user
             if(currentUser.getUsername().equals(username))
                 return currentUser;
         }
