@@ -10,6 +10,7 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 public class RuberServiceStub extends RuObject implements RuberService
@@ -61,31 +62,111 @@ public class RuberServiceStub extends RuObject implements RuberService
             return priceList;
         }
 
+    /**
+     *
+     */
     ArrayList<User> userList = new ArrayList<User>();
+    /**
+     *
+     */
     ArrayList<Trip> tripList = new ArrayList<Trip>();
 
+    /**
+     *
+     * @param trip
+     */
     public void addTrip(Trip trip)
     {
         tripList.add(trip);
     }
 
-    public History getHistory(String id) throws UserNotFoundException
+    /**
+     *
+     * @param uuid
+     * @return
+     */
+    public History getHistory(String uuid)
     {
-        throw new UserNotFoundException();
+        Iterator<Trip> tripIterator = tripList.iterator();
+        ArrayList<Trip> userTripList = new ArrayList<Trip>();
+
+        while(tripIterator.hasNext())
+        {
+            Trip currentTrip = tripIterator.next();
+            if(currentTrip.getUuid().equals(uuid))
+                userTripList.add(currentTrip);
+        }
+
+        History userHistory = new History();
+
+        userHistory.setLimit(0);
+        userHistory.setOffset(0);
+        userHistory.setCount(userTripList.size());
+        userHistory.setTrip(userTripList);
+
+        return userHistory;
     }
 
-    public void signup(User user)
+    /**
+     *
+     * @param user
+     * @throws UsernameExistsException
+     */
+    public void signup(User user) throws UsernameExistsException
     {
+        Iterator<User> userIterator = userList.iterator();
+        while(userIterator.hasNext())
+        {
+            User currentUser = userIterator.next();
+            if(currentUser.getUsername().equals(user.getUsername()))
+                throw new UsernameExistsException("Username is taken. Please choose something else.");
+        }
 
+        userList.add(user);
     }
 
-    public int getUsers()
+    /**
+     *
+     * @param limit
+     * @param offset
+     * @return
+     * @throws UserNotFoundException
+     */
+    public List<User> getUsers(int limit, int offset) throws UserNotFoundException
     {
-        return 0;
+        //
+        if(userList.size() <= 0)
+            throw new UserNotFoundException("List of users is empty");
+
+        //
+        if(userList.size() < offset)
+            throw new UserNotFoundException("List of users is shorter than the offset");
+
+        //
+        if(100 < limit)
+            throw new UserNotFoundException("Limit should not exceed 100");
+
+        //
+        return userList.subList(offset, Math.min(offset + limit, 100));
     }
 
+    /**
+     *
+     * @param username
+     * @return
+     * @throws UserNotFoundException
+     */
     public User getUser(String username) throws UserNotFoundException
     {
-        throw new UserNotFoundException();
+        Iterator<User> userIterator = userList.iterator();
+
+        while(userIterator.hasNext())
+        {
+            User currentUser = userIterator.next();
+            if(currentUser.getUsername().equals(username))
+                return currentUser;
+        }
+
+        throw new UserNotFoundException("There's no user with that username");
     }
 }
